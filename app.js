@@ -6,4 +6,13 @@ const app = express();
 
 const port = process.env.PORT;
 
-const server = app.listen(port, () => console.log("Server listenin on port " + port))
+const server = app.listen(port, () => console.log("Server listening on port " + port))
+
+// Tell server which template engine to use
+app.set("view engine", "pug");
+// Tell server where to find pug template files
+app.set("views", "views")
+
+app.get("/", (req, res, next) => {
+  res.status(200).render("home")
+})
