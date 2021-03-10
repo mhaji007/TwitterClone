@@ -14,5 +14,11 @@ app.set("view engine", "pug");
 app.set("views", "views")
 
 app.get("/", (req, res, next) => {
-  res.status(200).render("home")
+  // Dynamic page title
+  // Dynamically pass data from server to template
+  // payload sen to to and accessed in home.pug
+  var payload = {
+    pageTitle:"Home"
+  }
+  res.status(200).render("home", payload)
 })
