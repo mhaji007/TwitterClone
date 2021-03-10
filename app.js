@@ -5,6 +5,7 @@ require("dotenv").config();
 const app = express();
 
 const port = process.env.PORT;
+const {requireLogin} = require("./middleware")
 
 const server = app.listen(port, () => console.log("Server listening on port " + port))
 
@@ -13,7 +14,7 @@ app.set("view engine", "pug");
 // Tell server where to find pug template files
 app.set("views", "views")
 
-app.get("/", (req, res, next) => {
+app.get("/", requireLogin, (req, res, next) => {
   // Dynamic page title
   // Dynamically pass data from server to template
   // payload sen to to and accessed in home.pug
