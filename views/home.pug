@@ -1,6 +1,9 @@
-html
-    head
-        title #{pageTitle}
-    body
-        h1 This is pugsome
+extends layouts/main-layout.pug
+//- Anypage that extends another template file
+//- needs block content to render contents
+
+//- Take the below block and put it in
+//- template that is being extended (here, main-layout)
+block content
+    h1 This is pugsome
 
