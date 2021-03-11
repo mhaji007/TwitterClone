@@ -1,4 +1,5 @@
 const express = require("express")
+const path = require("path")
 require("dotenv").config();
 
 
@@ -13,6 +14,8 @@ const server = app.listen(port, () => console.log("Server listening on port " + 
 app.set("view engine", "pug");
 // Tell server where to find pug template files
 app.set("views", "views")
+
+app.use(express.static(path.join(__dirname,"public")))
 
 const loginRoute = require("./routes/loginRoutes")
 
