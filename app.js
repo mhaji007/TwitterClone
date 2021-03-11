@@ -5,6 +5,7 @@ require("dotenv").config();
 const app = express();
 
 const port = process.env.PORT;
+
 const { requireLogin } = require("./middleware");
 
 const server = app.listen(port, () =>
@@ -22,9 +23,11 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 
 const loginRoute = require("./routes/loginRoutes");
+const registerRoute = require("./routes/RegisterRoutes");
 
 // Route middlewares
 app.use("/login", loginRoute);
+app.use("/register", registerRoute);
 
 app.get("/", requireLogin, (req, res, next) => {
   // Dynamic page title
