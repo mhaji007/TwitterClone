@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 require("dotenv").config();
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const loginRoute = require("./routes/loginRoutes");
 const registerRoute = require("./routes/RegisterRoutes");
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Route middlewares
 app.use("/login", loginRoute);
