@@ -1,3 +1,6 @@
 exports.renderLogin = (req, res, next) => {
-  res.status(200).render("Login");
+    var payload = {
+      pageTitle: "Login",
+    };
+  res.status(200).render("Login", payload);
 }
