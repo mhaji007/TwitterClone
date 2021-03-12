@@ -4,7 +4,7 @@ const router = express.Router();
 const bodyParser = require("body-parser");
 
 // Import controllers
-const { renderRegister } = require("../controllers/registerControllers");
+const { renderRegister, submitRegister } = require("../controllers/registerControllers");
 
 // Tell server which template engine to use
 app.set("view engine", "pug");
@@ -16,6 +16,6 @@ app.set("views", "views");
 app.use(bodyParser.urlencoded({extended:false}))
 
 router.get("/", renderRegister);
-router.post("/", renderRegister);
+router.post("/", submitRegister);
 
 module.exports = router;
