@@ -5,6 +5,11 @@ const bodyParser = require("body-parser");
 const { requireLogin } = require("./middleware");
 const mongoose = require("mongoose");
 
+// Import routes
+const loginRoute = require("./routes/loginRoutes");
+const registerRoute = require("./routes/RegisterRoutes");
+
+// Initialize app
 const app = express();
 
 // Connect to Database
@@ -18,20 +23,21 @@ mongoose
   .then(() => console.log("Successfully connected to the Database"))
   .catch((err) => console.log("Database connection error", err));
 
-
+// Set view engine
 
 // Tell server which template engine to use
 app.set("view engine", "pug");
 // Tell server where to find pug template files
 app.set("views", "views");
 
+// Global Middlwares
+
 // Static fies are files that are not processed by the server
 // before being handed down to the client (browser)
 // __dirname gives absolute path to the file that is currently running
 app.use(express.static(path.join(__dirname, "public")));
 
-const loginRoute = require("./routes/loginRoutes");
-const registerRoute = require("./routes/RegisterRoutes");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Route middlewares
