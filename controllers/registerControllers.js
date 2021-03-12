@@ -38,6 +38,7 @@ exports.submitRegister = async (req, res, next) => {
       data.password = await bcrypt.hash(password, 10);
 
       User.create(data).then((user) => {
+        // Save session
         req.session.user = user;
         return res.redirect("/")
       });

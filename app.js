@@ -40,12 +40,14 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(session({
   secret:process.env.SESSION_SECRET,
-  // Forces session to be saved
+  // Forces session to be saved even when the session
+  // was not modified
   resave:true,
-  // Prevents saving session from uninitialized
+  // Prevents saving session as uninitialized
+  // If not set, would save session as initialized
+  // which takes up space
   // Saves storage on server
   saveUninitialized:false
-
 }))
 
 
@@ -61,6 +63,7 @@ app.get("/", requireLogin, (req, res, next) => {
   // payload sen to to and accessed in home.pug
   var payload = {
     pageTitle: "Home",
+    userLoggedIn: req.session.user
   };
   res.status(200).render("home", payload);
 });
