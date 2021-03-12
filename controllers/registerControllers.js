@@ -5,7 +5,7 @@ exports.renderRegister = (req, res, next) => {
   res.status(200).render("Register", payload);
 };
 
-exports.submitRegister = (req, res, next) => {
+exports.submitRegister = async (req, res, next) => {
   // Store values entered by the user
   var body = req.body;
   var firstName = req.body.firstName.trim();
@@ -13,7 +13,7 @@ exports.submitRegister = (req, res, next) => {
   var username = req.body.username.trim();
   var email = req.body.email.trim();
   var password = req.body.password;
-  const User = require("../models/user")
+  const User = require("../models/user");
 
   var payload = {
     pageTitle: "Register",
@@ -21,15 +21,9 @@ exports.submitRegister = (req, res, next) => {
   };
   // Check whether fileds are not empty
   if (firstName && lastName && username && email && password) {
-    User.findOne({
-      $or: [
-        {username: username},
-        {email: email}
-      ]
-    })
-    .then((user) => {
-      
-    })
+    var user = await User.findOne({
+      $or: [{ username: username }, { email: email }],
+    });
   }
   // If a field is missing return the register page
   // with prefilled values for fields with value
