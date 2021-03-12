@@ -19,11 +19,26 @@ exports.submitRegister = async (req, res, next) => {
     pageTitle: "Register",
     ...body,
   };
-  // Check whether fileds are not empty
+  // Check whether fields are not empty
   if (firstName && lastName && username && email && password) {
     var user = await User.findOne({
       $or: [{ username: username }, { email: email }],
+    }).catch((error) => {
+      console.error(error);
+      payload.errorMessage = "Something went wrong";
+      res.status(200).render("Register", payload);
     });
+    if (user == null) {
+      // No user found
+    } else {
+      // User found
+      if (email == user.email) {
+        payload.errorMessage = "Email already in use";
+      } else {
+        payload.errorMessage = "Username already in use";
+      }
+      res.status(200).render("register", payload)
+    }
   }
   // If a field is missing return the register page
   // with prefilled values for fields with value
