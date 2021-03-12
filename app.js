@@ -2,16 +2,23 @@ const express = require("express");
 const path = require("path");
 require("dotenv").config();
 const bodyParser = require("body-parser");
+const { requireLogin } = require("./middleware");
+const mongoose = require("mongoose");
 
 const app = express();
 
-const port = process.env.PORT;
+// Connect to Database
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Successfully connected to the Database"))
+  .catch((err) => console.log("Database connection error", err));
 
-const { requireLogin } = require("./middleware");
 
-const server = app.listen(port, () =>
-  console.log("Server listening on port " + port)
-);
 
 // Tell server which template engine to use
 app.set("view engine", "pug");
@@ -40,3 +47,9 @@ app.get("/", requireLogin, (req, res, next) => {
   };
   res.status(200).render("home", payload);
 });
+
+const port = process.env.PORT || 4000;
+
+const server = app.listen(port, () =>
+  console.log("Server listening on port " + port)
+);
