@@ -36,9 +36,10 @@ exports.submitRegister = async (req, res, next) => {
       // Insert data in database
       var data = body;
       data.password = await bcrypt.hash(password, 10);
-      
+
       User.create(data).then((user) => {
-        console.log(user);
+        req.session.user = user;
+        return res.redirect("/")
       });
     } else {
       // User found

@@ -4,6 +4,7 @@ require("dotenv").config();
 const bodyParser = require("body-parser");
 const { requireLogin } = require("./middleware");
 const mongoose = require("mongoose");
+const session = require("express-session");
 
 // Import routes
 const loginRoute = require("./routes/loginRoutes");
@@ -36,6 +37,16 @@ app.set("views", "views");
 // before being handed down to the client (browser)
 // __dirname gives absolute path to the file that is currently running
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(session({
+  secret:process.env.SESSION_SECRET,
+  // Forces session to be saved
+  resave:true,
+  // Prevents saving session from uninitialized
+  // Saves storage on server
+  saveUninitialized:false
+
+}))
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
