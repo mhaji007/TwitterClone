@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 exports.renderRegister = (req, res, next) => {
   var payload = {
     pageTitle: "Register",
@@ -30,12 +32,14 @@ exports.submitRegister = async (req, res, next) => {
     });
     if (user == null) {
       // No user found
-      // Insert in database
-      var data=body;
-      User.create(data)
-      .then ((user) => {
-        console.log(user)
-      })
+      // hash password
+      // Insert data in database
+      var data = body;
+      data.password = await bcrypt.hash(password, 10);
+      
+      User.create(data).then((user) => {
+        console.log(user);
+      });
     } else {
       // User found
       // alert error message
@@ -44,7 +48,7 @@ exports.submitRegister = async (req, res, next) => {
       } else {
         payload.errorMessage = "Username already in use";
       }
-      res.status(200).render("register", payload)
+      res.status(200).render("register", payload);
     }
   }
   // If a field is missing return the register page
