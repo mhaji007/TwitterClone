@@ -1,10 +1,11 @@
 const bcrypt = require("bcrypt");
+const User = require("../models/user");
 
 exports.renderRegister = (req, res, next) => {
   var payload = {
     pageTitle: "Register",
   };
-  res.status(200).render("Register", payload);
+  res.status(200).render("register", payload);
 };
 
 exports.submitRegister = async (req, res, next) => {
@@ -15,7 +16,6 @@ exports.submitRegister = async (req, res, next) => {
   var username = req.body.username.trim();
   var email = req.body.email.trim();
   var password = req.body.password;
-  const User = require("../models/user");
 
   var payload = {
     pageTitle: "Register",
@@ -28,7 +28,7 @@ exports.submitRegister = async (req, res, next) => {
     }).catch((error) => {
       console.error(error);
       payload.errorMessage = "Something went wrong";
-      res.status(200).render("Register", payload);
+      res.status(200).render("register", payload);
     });
     if (user == null) {
       // No user found
@@ -40,7 +40,7 @@ exports.submitRegister = async (req, res, next) => {
       User.create(data).then((user) => {
         // Save session
         req.session.user = user;
-        return res.redirect("/")
+        return res.redirect("/");
       });
     } else {
       // User found
@@ -58,6 +58,6 @@ exports.submitRegister = async (req, res, next) => {
   // along with an error
   else {
     payload.errorMessage = "Please provide a valid value for all fields";
-    res.status(200).render("Register", payload);
+    res.status(200).render("register", payload);
   }
 };

@@ -63,6 +63,8 @@ app.get("/", requireLogin, (req, res, next) => {
   // payload sen to to and accessed in home.pug
   var payload = {
     pageTitle: "Home",
+    // Send logged-in user information
+    // from server to the page
     userLoggedIn: req.session.user
   };
   res.status(200).render("home", payload);
