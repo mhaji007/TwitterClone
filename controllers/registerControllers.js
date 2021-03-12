@@ -30,8 +30,15 @@ exports.submitRegister = async (req, res, next) => {
     });
     if (user == null) {
       // No user found
+      // Insert in database
+      var data=body;
+      User.create(data)
+      .then ((user) => {
+        console.log(user)
+      })
     } else {
       // User found
+      // alert error message
       if (email == user.email) {
         payload.errorMessage = "Email already in use";
       } else {
