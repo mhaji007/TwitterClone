@@ -9,6 +9,7 @@ const session = require("express-session");
 // Import routes
 const loginRoute = require("./routes/loginRoutes");
 const registerRoute = require("./routes/RegisterRoutes");
+const logoutRoute = require("./routes/logoutRoutes");
 
 // Initialize app
 const app = express();
@@ -56,6 +57,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Route middlewares
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
+app.use("/logout", logoutRoute);
 
 app.get("/", requireLogin, (req, res, next) => {
   // Dynamic page title
