@@ -7,4 +7,13 @@
 $("#postTextarea").keyup((event)=>{
   var textbox = $(event.target)
   var value = textbox.val().trim()
+
+  var submitbutton = $("#submitPostButton")
+  if(submitbutton.length == 0) return alert("No submit button found")
+
+  if(value == "") {
+    submitbutton.prop("disabled", true)
+    return;
+  }
+  submitbutton.prop("disabled", false)
 })
