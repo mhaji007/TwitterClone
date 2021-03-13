@@ -6,6 +6,10 @@
   --spacing: 50px;
 }
 
+* {
+  outline: transparent !important;
+}
+
 a {
   color: inherit;
 }
