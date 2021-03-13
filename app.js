@@ -6,10 +6,13 @@ const { requireLogin } = require("./middleware");
 const mongoose = require("mongoose");
 const session = require("express-session");
 
-// Import routes
+// Import page handler routes
 const loginRoute = require("./routes/loginRoutes");
 const registerRoute = require("./routes/RegisterRoutes");
 const logoutRoute = require("./routes/logoutRoutes");
+
+// Import API routes
+const postApiRoute = require("./routes/api/posts");
 
 // Initialize app
 const app = express();
@@ -39,25 +42,29 @@ app.set("views", "views");
 // __dirname gives absolute path to the file that is currently running
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(session({
-  secret:process.env.SESSION_SECRET,
-  // Forces session to be saved even when the session
-  // was not modified
-  resave:true,
-  // Prevents saving session as uninitialized
-  // If not set, would save session as initialized
-  // which takes up space
-  // Saves storage on server
-  saveUninitialized:false
-}))
-
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    // Forces session to be saved even when the session
+    // was not modified
+    resave: true,
+    // Prevents saving session as uninitialized
+    // If not set, would save session as initialized
+    // which takes up space
+    // Saves storage on server
+    saveUninitialized: false,
+  })
+);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Route middlewares
+// Page handler Route middlewares
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 app.use("/logout", logoutRoute);
+
+// API routes
+app.use("/api", postApiRoute);
 
 app.get("/", requireLogin, (req, res, next) => {
   // Dynamic page title
@@ -67,7 +74,7 @@ app.get("/", requireLogin, (req, res, next) => {
     pageTitle: "Home",
     // Send logged-in user information
     // from server to the page
-    userLoggedIn: req.session.user
+    userLoggedIn: req.session.user,
   };
   res.status(200).render("home", payload);
 });

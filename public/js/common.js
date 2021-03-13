@@ -3,7 +3,7 @@
 // Wait until all dependencies have been loaded
 // $(document).ready(() => {alert('Testing')})
 
-
+//  Keyup handler
 $("#postTextarea").keyup((event)=>{
   var textbox = $(event.target)
   var value = textbox.val().trim()
@@ -16,4 +16,19 @@ $("#postTextarea").keyup((event)=>{
     return;
   }
   submitbutton.prop("disabled", false)
+})
+
+$("#submitPostButton").click((event) => {
+  var button = $(event.target)
+  var textbox = $("#postTextarea")
+  // Content to be submitted
+  var data = {
+    content:textbox.val()
+  }
+
+  $.post("/api/posts", data, (postData, status, xhr) =>{
+
+  })
+
+
 })
