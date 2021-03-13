@@ -22,11 +22,6 @@ h1 {
 
 
 nav {
-
-}
-
-
-nav {
   display: flex;
   flex-direction:column;
   align-items:flex-end;
@@ -41,6 +36,7 @@ nav a {
   display:flex;
   align-items:center;
   justify-content:center;
+  color:#212529;
 }
 
 nav a.blue {

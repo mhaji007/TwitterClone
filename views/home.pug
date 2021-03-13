@@ -4,8 +4,8 @@ extends layouts/main-layout.pug
 
 //- Take the below block and put it in
 //- template that is being extended (here, main-layout)
+//-  call createPostForm mixin
 block content
-    h1 This is pugsome
 
-    p #{userLoggedIn.firstName}
+    +createPostForm(userLoggedIn)
 
