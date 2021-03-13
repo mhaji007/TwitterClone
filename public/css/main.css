@@ -1,6 +1,8 @@
 :root {
   --twitter-blue:#1FA2F1;
-  --button-hover-bg:#d4edff
+  --button-hover-bg:#d4edff;
+  --light-grey:rgb(230,236,240);
+  --spacing:50px;
 }
 
 a {
@@ -12,9 +14,15 @@ a:hover {
   text-decoration:none;
 }
 
+h1 {
+  font-size:19px;
+  font-weight: 800;
+  margin: 0;
+}
+
 
 nav {
-  /* background-color: red; */
+
 }
 
 
@@ -46,6 +54,25 @@ nav a:hover {
 }
 
 .mainSectionContainer {
-  background-color:blueviolet;
+  padding:0;
+  border-left:1px solid var(--light-grey);
+  border-right:1px solid var(--light-grey);
+  display: flex;
+  flex-direction:column;
 
+}
+
+.titleContainer {
+  height: 53px;
+  padding: 0 var(--spacing);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--light-grey);
+  /* Safari fix */
+  flex-shrink: 0;
+
+}
+
+.titleContainer h1 {
+  flex:1
 }
