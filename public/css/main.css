@@ -1,6 +1,7 @@
 :root {
   --twitter-blue: #1fa2f1;
   --button-hover-bg: #d4edff;
+  --light-blue:#9BD1F9;
   --light-grey: rgb(230, 236, 240);
   --spacing: 50px;
 }
@@ -87,4 +88,30 @@ nav a:hover {
   width: 100%;
   border-radius: 50%;
   background-color: white;
+}
+
+.textareaContainer {
+  /* Image takes up 50px and textarea container takes all the rest */
+  flex: 1;
+  padding-left: var(--spacing);
+}
+
+.textareaContainer textarea {
+  width: 100%;
+  border: none;
+  resize: none;
+  font-size: 19px;
+}
+
+#submitPostButton {
+  background-color:var(--twitter-blue);
+  color: white;
+  border: none;
+  border-radius:40px;
+  padding: 7px 15px;
+
+}
+
+#submitPostButton:disabled {
+  background-color:var(--light-blue);
 }
