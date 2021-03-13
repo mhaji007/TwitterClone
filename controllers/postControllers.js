@@ -1,3 +1,6 @@
 exports.createPost = (req, res, next) => {
-  res.status(200).send("It worked")
+  if(!req.body.content) {
+    console.log("Content param not sent with request")
+    res.sendStatus(400)
+  }
 }
