@@ -27,8 +27,20 @@ $("#submitPostButton").click((event) => {
   }
 
   $.post("/api/posts", data, (postData, status, xhr) =>{
-    console.log(postData)
+    var html = createPostHtml(postData);
+    // Add to the start of the postContainer
+    $(".postContainer").prepend(html);
+    textbox.val("");
+    // When JQuery is used to remove the text
+    // key up event is not triggered and code
+    // will not set it so we have to set it manually
+    button.prop("disabled",true)
   })
+
+  function createPostHtml(postData) {
+    return postData.content
+  }
+
 
 
 })
