@@ -37,15 +37,14 @@ $("#submitPostButton").click((event) => {
     button.prop("disabled", true);
   });
 
-function createPostHtml(postData) {
+  function createPostHtml(postData) {
+     var postedBy = postData.postedBy;
 
-    var postedBy = postData.postedBy;
-
-    return `<div class='post'>
+     return `<div class='post'>
 
                 <div class='mainContentContainer'>
                     <div class='userImageContainer'>
-                        <img src='${postedBy.profilePic}'>
+                        <img src='${postedBy.profilePicture}'>
                     </div>
                     <div class='postContentContainer'>
                         <div class='header'>
@@ -58,4 +57,5 @@ function createPostHtml(postData) {
                     </div>
                 </div>
             </div>`;
-}
+  }
+});
