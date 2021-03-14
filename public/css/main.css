@@ -4,6 +4,7 @@
   --light-blue:#9BD1F9;
   --light-grey: rgb(230, 236, 240);
   --spacing: 50px;
+  --grey-text:rgb(101, 119, 134);
 }
 
 * {
@@ -118,4 +119,30 @@ nav a:hover {
 
 #submitPostButton:disabled {
   background-color:var(--light-blue);
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing);
+    cursor: pointer;
+    border-bottom: 1px solid var(--light-grey);
+    flex-shrink: 0;
+}
+
+.mainContentContainer {
+    flex: 1;
+    display: flex;
+}
+
+.postContentContainer {
+    padding-left: var(--spacing);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.username,
+.date {
+    color: var(--grey-text)
 }
