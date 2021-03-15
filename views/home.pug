@@ -2,11 +2,17 @@ extends layouts/main-layout.pug
 //- Any page that extends another template file
 //- needs block content to render contents
 
-//- Take the below block and put it in
-//- template that is being extended (here, main-layout)
+//- What the following line of code mans is "take the below block and put it in
+//- template that is being extended (here, main-layout)".
+//- Essentially, the cotent block in main-layout will be replaced by
+//- the contents of the block here
 //- call createPostForm mixin (mixins are imported into main-layout)
 //- which is imported here
+//- createPostForm comes from mixins.pug
 block content
     +createPostForm(userLoggedIn)
     .postContainer
+
+block scripts
+    script(src="/js/home.js")
 
