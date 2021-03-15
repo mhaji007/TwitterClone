@@ -1,1 +1,5 @@
-$(document).ready(()=>{alert("This worked")})
+$(document).ready(() => {
+  $.get("/api/posts", (results) => {
+    console.log(results)
+  });
+});
