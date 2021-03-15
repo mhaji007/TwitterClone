@@ -5,6 +5,7 @@
   --light-grey: rgb(230, 236, 240);
   --spacing: 50px;
   --grey-text:rgb(101, 119, 134);
+  --grey-btn-text:rgba(0, 0, 0, 0.34)
 }
 
 * {
@@ -130,6 +131,13 @@ nav a:hover {
     flex-shrink: 0;
 }
 
+button {
+    background-color: transparent;
+    border: none;
+    color: var(--grey-btn-text);
+}
+
+
 .mainContentContainer {
     flex: 1;
     display: flex;
@@ -145,4 +153,22 @@ nav a:hover {
 .username,
 .date {
     color: var(--grey-text)
+}
+
+.displayName {
+    font-weight: bold;
+}
+
+.postFooter {
+    display: flex;
+    align-items: center;
+}
+
+.postFooter .postButtonContainer {
+    flex: 1;
+    display: flex;
+}
+
+.postFooter .postButtonContainer button {
+    padding: 0 5px;
 }

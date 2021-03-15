@@ -42,7 +42,7 @@ $("#submitPostButton").click((event) => {
      var displayName = postedBy.firstName + " " + postedBy.lastName;
      var timestamp = postData.createdAt;
 
-     return `<div class='post'>
+    return `<div class='post'>
 
                 <div class='mainContentContainer'>
                     <div class='userImageContainer'>
@@ -50,7 +50,7 @@ $("#submitPostButton").click((event) => {
                     </div>
                     <div class='postContentContainer'>
                         <div class='header'>
-                            <a href='/profile/${postedBy.username}'>${displayName}</a>
+                            <a href='/profile/${postedBy.username}' class='displayName'>${displayName}</a>
                             <span class='username'>@${postedBy.username}</span>
                             <span class='date'>${timestamp}</span>
                         </div>
@@ -58,6 +58,21 @@ $("#submitPostButton").click((event) => {
                             <span>${postData.content}</span>
                         </div>
                         <div class='postFooter'>
+                            <div class='postButtonContainer'>
+                                <button>
+                                    <i class='fa fa-comment'></i>
+                                </button>
+                            </div>
+                            <div class='postButtonContainer'>
+                                <button>
+                                    <i class='fa fa-retweet'></i>
+                                </button>
+                            </div>
+                            <div class='postButtonContainer'>
+                                <button>
+                                    <i class='fa fa-heart'></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
