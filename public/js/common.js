@@ -36,20 +36,30 @@ $("#submitPostButton").click((event) => {
     // will not set it so we have to set it manually
     button.prop("disabled", true);
   });
-
 });
 
-function createPostHtml(postData) {
-   var postedBy = postData.postedBy;
-  // Check to see whether postedBy is populated on the server
-   if(postedBy._id === undefined) {
-    //  postedBy is just an objectId
-     return console.log("User object not populated")
-   }
+// The following will not work because of
+// the dynamic nature of the content (page loads first => posts are fetched)
+// By the time the code runs and click event
+// is triggered the button elements are not on the page yet
+$(".likeButton").click(() => {
+  alert("button clicked");
+});
 
-   var displayName = postedBy.firstName + " " + postedBy.lastName;
+// This works
+$(document).on("click", ".likeButton", () => alert("button clicked"));
+
+function createPostHtml(postData) {
+  var postedBy = postData.postedBy;
+  // Check to see whether postedBy is populated on the server
+  if (postedBy._id === undefined) {
+    //  postedBy is just an objectId
+    return console.log("User object not populated");
+  }
+
+  var displayName = postedBy.firstName + " " + postedBy.lastName;
   //  var timestamp = postData.createdAt;
-   var timestamp = timeDifference(new Date(), new Date(postData.createdAt));
+  var timestamp = timeDifference(new Date(), new Date(postData.createdAt));
 
   return `<div class='post'>
 
@@ -78,7 +88,7 @@ function createPostHtml(postData) {
                               </button>
                           </div>
                           <div class='postButtonContainer'>
-                              <button>
+                              <button class='likeButton'>
                                   <i class='fa fa-heart'></i>
                               </button>
                           </div>
