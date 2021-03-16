@@ -27,6 +27,7 @@ exports.createPost = async (req, res, next) => {
 // Retrieve all posts
 exports.getPosts = async (req, res, next) => {
   Post.find()
+    .populate("postedBy")
     .then((results) => {
       res.status(200).send(results);
     })
