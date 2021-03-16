@@ -38,16 +38,42 @@ $("#submitPostButton").click((event) => {
   });
 });
 
+// ========================================================================== /
+
 // The following will not work because of
 // the dynamic nature of the content (page loads first => posts are fetched)
 // By the time the code runs and click event
 // is triggered the button elements are not on the page yet
-$(".likeButton").click(() => {
-  alert("button clicked");
-});
+
+// $(".likeButton").click(() => {
+//   alert("button clicked");
+// });
 
 // This works
-$(document).on("click", ".likeButton", () => alert("button clicked"));
+
+// $(document).on("click", ".likeButton", () => alert("button clicked"));
+
+// =========================================================================== /
+
+$(document).on("click", ".likeButton", (event) => {
+  var button = $(event.target);
+  var postId = getPostIdFromElement(button);
+  console.log(postId);
+});
+// Go through the tree until root level post is found and
+// take the id from there
+// .closest("class-name") goes up the tree until a node with specified class is found
+// .data() returns all the data attributes attached to the element
+// .data().id returns the value corresponding to data-id
+function getPostIdFromElement(element) {
+  var isRoot = element.hasClass("post");
+  var rootElement = isRoot == true ? element : element.closest(".post");
+  var postId = rootElement.data().id;
+
+  if (postId === undefined) return alert("Post id undefined");
+
+  return postId;
+}
 
 function createPostHtml(postData) {
   var postedBy = postData.postedBy;
@@ -61,7 +87,7 @@ function createPostHtml(postData) {
   //  var timestamp = postData.createdAt;
   var timestamp = timeDifference(new Date(), new Date(postData.createdAt));
 
-  return `<div class='post'>
+  return `<div class='post' data-id='${postData._id}' >
 
               <div class='mainContentContainer'>
                   <div class='userImageContainer'>
