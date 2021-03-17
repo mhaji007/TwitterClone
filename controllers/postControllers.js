@@ -37,3 +37,8 @@ exports.getPosts = async (req, res, next) => {
       res.sendStatus(400);
     });
 };
+
+exports.addLike = async (req, res, next) => {
+  // 204 ==> success, but with no result to return
+  res.status(200).send("Liked!")
+}

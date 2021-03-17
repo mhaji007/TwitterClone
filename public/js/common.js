@@ -58,7 +58,19 @@ $("#submitPostButton").click((event) => {
 $(document).on("click", ".likeButton", (event) => {
   var button = $(event.target);
   var postId = getPostIdFromElement(button);
-  console.log(postId);
+
+  if(postId === undefined) {
+    return;
+  }
+
+  //  There is no $.put
+  $.ajax({
+    url:"/api/posts", type:"PUT",
+    success: (postData) => {
+      console.log(postData)
+    }
+  })
+
 });
 // Go through the tree until root level post is found and
 // take the id from there
