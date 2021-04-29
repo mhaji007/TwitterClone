@@ -12,6 +12,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 router.post("/posts", createPost);
 router.get("/posts", getPosts);
-router.put("/posts", addLike)
+router.put("/posts/:id/like", addLike)
 
 module.exports = router;

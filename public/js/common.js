@@ -65,7 +65,7 @@ $(document).on("click", ".likeButton", (event) => {
 
   //  There is no $.put
   $.ajax({
-    url:"/api/posts", type:"PUT",
+    url:`/api/posts/${postId}/like`, type:"PUT",
     success: (postData) => {
       console.log(postData)
     }

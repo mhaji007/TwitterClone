@@ -40,5 +40,20 @@ exports.getPosts = async (req, res, next) => {
 
 exports.addLike = async (req, res, next) => {
   // 204 ==> success, but with no result to return
+  console.log(req.params.id)
+
+  var postId = req.params.id;
+  var userId = req.session.user._id;
+
+  var isLiked = req.session.user.likes && req.session.user.likes.includes(postId)
+
+  var option = isLiked ? "$pull" : "$addToSet"
+
+  // Insert user like
+  await User.findByIdAndUpdate(userId, {[option]:{likes: postId}})
+
+  console.log(isLiked)
+
+
   res.status(200).send("Liked!")
 }
