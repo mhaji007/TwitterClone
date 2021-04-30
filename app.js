@@ -69,13 +69,15 @@ app.use("/api", postApiRoute);
 app.get("/", requireLogin, (req, res, next) => {
   // Dynamic page title
   // Dynamically pass data from server to template
-  // payload sen to to and accessed in home.pug
+  // payload sent to and accessed in home.pug
   var payload = {
     pageTitle: "Home",
     // Send logged-in user information
     // from server to the page
     userLoggedIn: req.session.user,
   };
+  // .render renders the template file contents
+  // along with any payload
   res.status(200).render("home", payload);
 });
 

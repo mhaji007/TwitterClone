@@ -31,6 +31,7 @@ exports.submitLogin = async (req, res, next) => {
       var result = await bcrypt.compare(req.body.logPassword, user.password);
       if (result === true) {
         req.session.user = user;
+        console.log("req.session.user ====>", req.session.user)
         return res.redirect("/");
       }
     }

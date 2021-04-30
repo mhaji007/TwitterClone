@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
   },
 
   // Array of posts user has liked
-  // If we did not keep track of likes her
+  // If we did not keep track of likes here
   // It would mean to get all the posts that a user liked
   // we need to query every single post to check them all to
   // see which one contained the user which
